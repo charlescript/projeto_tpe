@@ -1,5 +1,74 @@
 *{ 
     padding: 0;
     margin: 0;
+    box-sizing: border-box;
 }
 
+
+body {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+
+.box_login {
+    width: 500px;
+    height: 500px;
+    background: #3a535f;
+    border: 0;
+    border-radius: 11px;
+}
+
+.box_login .capa {
+    height:230px;
+    background: url(../img/fatec_pg.png);
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    border: 0;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+.box_login h1{
+    font-size: 24px;
+    color: #FFF;
+    text-align: left;
+    margin: 15px 0px 20px 15px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 500;
+    margin-left: 4%;
+}
+
+.box_login form input{
+    margin: 5px 20px;
+    width: calc(100% - 40px);
+    padding: 9px 5px;
+    border: 0;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    text-align: center;
+    color: #3a535f;
+}
+
+
+.box_login form .btn-login{
+    margin: 5px 20px;
+    padding: 9px;
+    width: calc(100% - 40px);
+    background: #df610d;
+    color: #FFF;
+    border: 0;
+    border-radius: 7px;
+}
+
+.box_login form .btn-login:hover {
+    cursor: pointer;
+}
+
+.box_login form .btn-login:active {
+    background-color: blue;
+    opacity: 0.6;
+}
