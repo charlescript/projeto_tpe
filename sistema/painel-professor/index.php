@@ -1,3 +1,11 @@
+<?php 
+    @session_start();
+    if($_SESSION['nivel_usuario'] != "Professor"){
+        echo "<script language='javascript'>  window.location='../../modulo_autenticacao/error.php' </script> ";
+    }
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>

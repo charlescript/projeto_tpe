@@ -1,16 +1,20 @@
 <?php
-require_once("config.php");
 
-date_default_timezone_set('America/Sao_Paulo');
+// Inicio da conexão com o banco de dados utilizando PDO
+$host = "localhost";
+$user = "root";
+$pass = "";
+$dbname = "projeto_tpe";
+$port = 3306;
 
 try {
-	$pdo = new PDO("mysql:dbname=$banco;host=$servidor;charset=utf8", "$usuario", "$senha");
+    // Conexão com porta
+    //$conn = new PDO("mysql:host=$host;port=$port;dbname=" . $dbname, $user, $pass);
 
-	//CONEXAO MYSQLI PARA O BACKUP
-	$conn = mysqli_connect($servidor, $usuario, $senha, $banco);
+    //Conexão sem porta
+    $conn = new PDO("mysql:host=$host;dbname=" . $dbname, $user, $pass );
+    //echo "Conexão com banco de dados realizado com sucesso.";
 
-} catch (Exception $e) {
-	echo "Erro ao conectar com o banco de dados! " . $e;
+}catch(PDOException $err){
+    die("Erro: Conexão com banco de dados não realizado com sucesso. Erro gerado ". $err->getMessage());
 }
-
-?>

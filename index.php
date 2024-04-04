@@ -2,7 +2,7 @@
     require_once("./conexao.php");
 
     //VERIFICAR SE EXISTE ALGUM CADASTRO NO BANCO, SE NÃO TIVER CADASTRAR O USUÁRIO ADMINISTRADOR
-    $res = $pdo->query("SELECT * FROM tb_usuarios");
+    $res = $conn->query("SELECT * FROM tb_users");
     $dados = $res->fetchAll(PDO::FETCH_ASSOC);
     $senha_crip = md5('123');
     if(@count($dados) == 0){
