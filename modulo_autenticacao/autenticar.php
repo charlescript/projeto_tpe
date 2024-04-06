@@ -1,41 +1,48 @@
 <?php
     require_once('../conexao.php');
-    @session_start();
+    session_start();
 
-    $email = $_POST['email'];
-    $senha = md5($_POST['senha']);
+    if(isset($_POST['email'], $_POST['senha'])) {
+        $email = $_POST['email'];
+        $senha = md5($_POST['senha']); // Calcula o hash MD5 da senha fornecida
 
-    //  Usei uma consulta preparada para proteger contra SQL Injection
-    $query = "SELECT * FROM tb_users WHERE (email = :email OR cpf = :email) AND senha_crip = :senha"; 
-    $res = $conn->prepare($query);
-    $res->bindValue(":email", $email);
-    $res->bindValue(":senha", $senha);
-    $res->execute();
-    $dados = $res->fetchAll(PDO::FETCH_ASSOC);
+        // Consulta preparada para selecionar o usuário pelo e-mail ou CPF
+        $query = "SELECT * FROM tb_users WHERE email = :email OR cpf = :email";
+        $res = $conn->prepare($query);
+        $res->bindValue(":email", $email);
+        $res->execute();
+        $dados = $res->fetch(PDO::FETCH_ASSOC);
 
-    if(@count($dados) > 0){
-        $_SESSION['id_usuario'] = $dados[0]['id'];
-        $_SESSION['nome_usuario'] = $dados[0]['nome'];
-        $_SESSION['email_usuario'] = $dados[0]['email'];
-        $_SESSION['cpf_usuario'] = $dados[0]['cpf'];
-        $_SESSION['senha_crip'] = $dados[0]['senha_crip'];
-        $_SESSION['nivel_usuario'] = $dados[0]['nivel'];
-        
-        if($_SESSION['nivel_usuario'] == 'admin'){
-            echo "<script language='javascript'> window.location='../sistema/painel-admin/calendario' </script> ";
+        if($dados && $senha === $dados['senha_crip']) { // Verifica se os hashes MD5 são iguais
+            $_SESSION['id_usuario'] = $dados['id'];
+            $_SESSION['nome_usuario'] = $dados['nome'];
+            $_SESSION['email_usuario'] = $dados['email'];
+            $_SESSION['cpf_usuario'] = $dados['cpf'];
+            $_SESSION['nivel_usuario'] = $dados['nivel'];
+
+            switch($_SESSION['nivel_usuario']) {
+                case 'admin':
+                    header("Location: ../../sistema/painel-admin/calendario");
+                    break;
+                case 'aluno':
+                    header("Location: ../../sistema/painel-aluno");
+                    break;
+                case 'professor':
+                    header("Location: ../../sistema/painel-professor");
+                    break;
+                default:
+                    header("Location: ../error.php");
+                    break;
+            }
+            exit();
+        } else {
+            // Redireciona para página de erro de autenticação se as credenciais forem inválidas
+            header("Location: ../error1.php");
+            exit();
         }
-
-        if($_SESSION['nivel_usuario'] == 'aluno'){
-            echo "<script language='javascript'> window.location='../sistema/painel-aluno' </script> ";
-        }
-
-        if($_SESSION['nivel_usuario'] == 'professor'){
-            echo "<script language='javascript'> window.location='../sistema/painel-professor' </script> ";
-        }
-    
     } else {
-        echo "<script language='javascript'>  window.location='error.php' </script> ";
-        echo "<script language='javascript'> window.location='../index.php' </script> ";
-    } 
-
+        // Redireciona para página de erro se parâmetros não estiverem presentes
+        header("Location: ../error2.php");
+        exit();
+    }
 ?>

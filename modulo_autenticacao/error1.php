@@ -43,8 +43,8 @@
 </head>
 <body>
     <div class="container">
-        <h1>Erro: Usuário não encontrado</h1>
-        <p>111 O usuário que você está procurando não foi encontrado.</p>
+        <h1>Erro: ERRO 1</h1>
+        <p>O usuário que você está procurando não foi encontrado.</p>
         <a href="../index.php" class="back-btn">Voltar</a>
     </div>
 </body>

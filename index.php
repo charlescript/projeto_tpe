@@ -6,8 +6,8 @@
     $dados = $res->fetchAll(PDO::FETCH_ASSOC);
     $senha_crip = md5('123');
     if(@count($dados) == 0){
-        $res = $pdo->query("INSERT INTO tb_usuarios (nome, cpf, email, senha, senha_crip, nivel, dt_cadastro) VALUES
-        ('Administrador', '000.000.000-00', 'teste@gmail.com', '123', '$senha_crip','Admin', NOW() )");
+        $res = $conn->query("INSERT INTO tb_usuarios (nome, cpf, email, senha, senha_crip, nivel, dt_cadastro) VALUES
+        ('Administrador', '000.000.000-00', 'teste@gmail.com', '123', '$senha_crip','admin', NOW() )");
     }
 
 ?>
@@ -34,7 +34,7 @@
 
             <h1>LOGIN</h1>
 
-            <form action="./modulo_autenticacao/autenticar.php" method="post" name="login">
+            <form action="./modulo_autenticacao/autenticar.php/" method="post" name="login">
 
                 <input type="email" placeholder="EMAIL" name="email">
 
