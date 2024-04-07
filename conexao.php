@@ -7,12 +7,7 @@
 // $dbname = "projeto_tpe";
 // $port = 3306;
 
-// VARIAVEIS DO BANCO DE DADOS
-$host = '162.241.2.26';
-$user = 'sansal26_root';  // Esse é para testes em desenvolvimento com permissão total as funções SQL
-// $usuario = 'sansal26_client'; // Esse é para usuários clientes em produção com menos permissões
-$pass = "82a6c15p@@##!!";
-$dbname = "sansal26_projeto_tpe";
+
 
 try {
     // Conexão com porta
