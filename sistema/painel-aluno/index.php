@@ -1,6 +1,6 @@
 <?php 
     @session_start();
-    if($_SESSION['nivel_usuario'] != "Aluno"){
+    if($_SESSION['nivel_usuario'] != "aluno"){
         echo "<script language='javascript'>  window.location='../../modulo_autenticacao/error.php' </script> ";
     }
 ?>

@@ -1,4 +1,7 @@
 show databases;
+-- CREATE DATABASE projeto_tpe;
+-- use projeto_tpe;
+
 use sansal26_projeto_tpe;
 
 create table tb_events (
